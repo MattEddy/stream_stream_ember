@@ -1,0 +1,55 @@
+@import "bourbon";
+@import "neat";
+@import "base/variables";
+
+body {
+  margin: 10px;
+}
+.color-palette {
+  margin: 2em;
+
+  .palette-square {
+    text-align: center;
+    display: inline-block;
+    color: white;
+    width: 200px;
+    height: 200px;
+    .color-name {
+      position: relative;
+      top: 43%;
+    }
+  }
+
+  #lightest-blue {
+    background: $lightest-blue;
+  }
+  #light-blue {
+    background: $light-blue;
+  }
+  #blue {
+    background: $blue;
+  }
+  #dark-blue {
+    background: $dark-blue;
+  }
+  #darkest-blue {
+    background: $darkest-blue;
+  }
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}

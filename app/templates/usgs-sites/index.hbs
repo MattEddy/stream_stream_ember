@@ -1,0 +1,7 @@
+{{input value=search}}
+
+<ul>
+  {{#each site in model}}
+    <li>{{#link-to 'usgs-site.index' site.id}}{{site.name}}{{/link-to}}</li>
+  {{/each}}
+</ul>

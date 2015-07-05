@@ -1,0 +1,5 @@
+{{input value=days type="range" min="200" max="2814"}}
+
+{{#d3/d3-drawing width=1200 height=500 margin=60}}
+  {{d3/time-series data=scopedData}}
+{{/d3/d3-drawing}}
