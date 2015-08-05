@@ -7,6 +7,7 @@ var Router = Ember.Router.extend({
 
 export default Router.map(function() {
   this.route('component-library')
+  this.route('login')
   this.resource('usgs-sites', { path: 'usgs-sites' }, function() {
     this.route('search')
   })

@@ -2,6 +2,16 @@
 
 module.exports = function(environment) {
   var ENV = {
+    torii: {
+      // a 'session' property will be injected on routes and controllers
+      sessionServiceName: 'session',
+      providers: {
+        'facebook-oauth2': {
+          apiKey: '1447941138841640',
+          redirectUri: 'http://localhost:4200/api/session'
+        }
+      }
+    },
     modulePrefix: 'stream-stream-ember',
     environment: environment,
     baseURL: '/',
