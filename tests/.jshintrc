@@ -5,6 +5,7 @@
     "location",
     "setTimeout",
     "$",
+    "d3",
     "-Promise",
     "define",
     "console",

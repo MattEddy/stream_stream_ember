@@ -5,15 +5,15 @@ export default Ember.Component.extend({
   width: Ember.computed.alias("parentView.width"),
   margin: Ember.computed.alias("parentView.margin"),
   buildLine: function() {
-    var x = this.get('x')
-    var y = this.get('y')
+    var x = this.get('x');
+    var y = this.get('y');
     return d3.svg.line()
       .x(function(d) {
         return x(Date.parse(d.get('time')));
       })
       .y(function(d) {
         return y(d.get('flow_rate'));
-      })
+      });
   },
   buildXAxis: function() {
     return d3.svg.axis()
@@ -27,14 +27,14 @@ export default Ember.Component.extend({
   },
   changeStuff: function() {
     if (!Ember.isEmpty(this.get('x'))) {
-      this.setXDomain()
-      this.setYDomain()
+      this.setXDomain();
+      this.setYDomain();
       var line = this.buildLine();
       d3.select('.line')
         .transition()
         .ease("linear")
         .duration(200)
-        .attr('d', line(Em.A(this.get('data'))))
+        .attr('d', line(Ember.A(this.get('data'))));
 
       d3.select(".x.axis")
         .transition()
@@ -50,37 +50,35 @@ export default Ember.Component.extend({
     return "";
   }.property('data'),
   setXDomain: function() {
-    this.get('x').domain(d3.extent(Em.A(this.get('data')), function(d) {
+    this.get('x').domain(d3.extent(Ember.A(this.get('data')), function(d) {
       return Date.parse(d.get('time'));
     }));
   },
   setYDomain: function() {
-    this.get('y').domain(d3.extent(Em.A(this.get('data')), function(d) {
+    this.get('y').domain(d3.extent(Ember.A(this.get('data')), function(d) {
       return d.get('flow_rate');
     }));
   },
   draw: function() {
-    var data   = Em.A(this.get('data'))
+    var data   = Ember.A(this.get('data'));
     var width  = this.get('width') - this.get('margin') * 2;
     var height = this.get('height') - this.get('margin') * 2;
-    var svg    = d3.select('#'+this.get('parentView.elementId'))
-    var x = d3.time.scale() .range([0, width])
-    var y = d3.scale.linear() .range([height, 0])
+    var svg    = d3.select('#'+this.get('parentView.elementId'));
+    var x      = d3.time.scale() .range([0, width]);
+    var y      = d3.scale.linear() .range([height, 0]);
 
     this.set('x', x);
     this.set('y', y);
-    this.set('cleanData', data)
+    this.set('cleanData', data);
 
-    var xAxis = this.buildXAxis()
-    var yAxis = this.buildYAxis()
+    var xAxis = this.buildXAxis();
+    var yAxis = this.buildYAxis();
 
-    this.setXDomain()
-    this.setYDomain()
+    this.setXDomain();
+    this.setYDomain();
 
 
     var line = this.buildLine();
-
-    var svg = d3.select('#'+this.get('parentView.elementId'))
 
     // add x axis
     svg.append("g")
@@ -92,7 +90,7 @@ export default Ember.Component.extend({
     svg.append("g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + this.get('margin') + ",0)")
-      .call(yAxis)
+      .call(yAxis);
 
     svg.append("path")
       .datum(data)

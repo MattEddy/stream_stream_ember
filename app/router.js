@@ -6,13 +6,12 @@ var Router = Ember.Router.extend({
 });
 
 export default Router.map(function() {
-  this.route('component-library')
-  this.route('login')
+  this.route('component-library');
   this.resource('usgs-sites', { path: 'usgs-sites' }, function() {
-    this.route('search')
-  })
+    this.route('search');
+  });
 
   this.resource('usgs-site', { path: '/usgs-site/:usgs_site_id'}, function() {
 
-  })
+  });
 });

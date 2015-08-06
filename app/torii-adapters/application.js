@@ -20,7 +20,7 @@ export default Ember.Object.extend({
     });
   },
   fetch: function() {
-    return new Ember.RSVP.Promise(function(resolve, reject){
+    return new Ember.RSVP.Promise(function(resolve){
       var accessToken = window.localStorage.getItem('token');
       var userName    = window.localStorage.getItem('name');
       return resolve({

@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   // beforeModel: function() {
   //   return this.csrf.fetchToken();
   // },
-  model: function(params) {
+  model: function() {
     return this.modelFor('usgs-site').get('measurements');
   }
 });
