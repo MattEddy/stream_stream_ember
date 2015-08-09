@@ -1,5 +1,7 @@
 {
   "predef": [
+    "Ember",
+    "localStorage",
     "document",
     "window",
     "-Promise",

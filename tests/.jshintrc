@@ -6,6 +6,7 @@
     "setTimeout",
     "$",
     "d3",
+    "localStorage",
     "-Promise",
     "define",
     "console",
@@ -22,6 +23,7 @@
     "andThen",
     "currentURL",
     "currentPath",
+    "Ember",
     "currentRouteName"
   ],
   "node": false,
