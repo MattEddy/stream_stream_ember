@@ -1,39 +1,45 @@
 import Ember from 'ember';
+import Storage from '../utils/storage';
 
 export default Ember.Object.extend({
-  open: function(authentication){
+  storage: new Storage(),
+  open(authentication){
+    var storage = this.get('storage');
     var authorizationCode = authentication.authorizationCode;
-    return new Ember.RSVP.Promise(function(resolve, reject){
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
       Ember.$.ajax({
         url: 'api/session',
         data: { 'facebook-auth-code': authorizationCode },
-        dataType: 'json',
-        success: Ember.run.bind(null, resolve),
-        error: Ember.run.bind(null, reject)
+        dataType: 'json'
+      }).then(function(user){
+        if (Ember.isEmpty(user.token)) {
+          reject()
+        }
+        storage.store({
+          token: user.token,
+          name: user.name
+        })
+        return resolve({
+          currentUser: user
+        });
       });
-    }).then(function(user){
-      window.localStorage.setItem('token', user.token);
-      window.localStorage.setItem('name',  user.name);
-      return {
-        currentUser: user
-      };
+    })
+  },
+  fetch() {
+    var storage = this.get('storage');
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if(storage.exists('token')) {
+        return resolve(storage.fetch('token', 'name'));
+      } else {
+        return reject()
+      }
     });
   },
-  fetch: function() {
-    return new Ember.RSVP.Promise(function(resolve){
-      var accessToken = window.localStorage.getItem('token');
-      var userName    = window.localStorage.getItem('name');
-      return resolve({
-        token: accessToken,
-        userName: userName
-      });
-    }).then(function(user){
-      return {
-        userName:    user.userName,
-        accessToken: user.token
-      };
-    });
-  },
-  close: function() {
+  close() {
+    var storage = this.get('storage');
+
+    storage.nullItems('token', 'name')
   }
 });
