@@ -25,7 +25,7 @@ export default Ember.Component.extend({
       .scale(this.get('y'))
       .orient("left");
   },
-  changeStuff: function() {
+  yieldedGraph: function() {
     if (!Ember.isEmpty(this.get('x'))) {
       this.setXDomain();
       this.setYDomain();
