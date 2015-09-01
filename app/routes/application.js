@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   beforeModel() {
-    return this.get('session').fetch('mad-march-runs-api').catch(function() {
+    return this.get('session').fetch('facebook-oauth2').catch(function() {
       // no op is fine here
     });
   },
@@ -12,7 +12,7 @@ export default Ember.Route.extend({
       }, function(){});
     },
     logout() {
-      this.get('session').close();
+      this.get('session').close('facebook-oauth2');
     }
   }
 });

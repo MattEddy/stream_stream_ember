@@ -3,7 +3,8 @@ import Storage from '../utils/storage';
 
 export default Ember.Object.extend({
   storage: new Storage(),
-  open(authentication){
+  open: function(authentication) {
+    debugger;
     var storage = this.get('storage');
     var authorizationCode = authentication.authorizationCode;
 
@@ -14,7 +15,7 @@ export default Ember.Object.extend({
         dataType: 'json'
       }).then(function(user){
         if (Ember.isEmpty(user.token)) {
-          reject();
+          return reject();
         }
         storage.store({
           token: user.token,
