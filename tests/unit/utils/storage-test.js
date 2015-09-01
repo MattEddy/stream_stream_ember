@@ -28,7 +28,7 @@ test('.nullItems removes items of the given key', function(assert) {
   assert.deepEqual(localStorage.getItem('someOtherKey'), null);
 });
 
-test('.exists', function(assert) {
+test('.exists returns boolean based on existence', function(assert) {
   localStorage.setItem('someKey', 'cats');
   assert.ok(this.storage.exists('someKey'));
   localStorage.removeItem('someKey');

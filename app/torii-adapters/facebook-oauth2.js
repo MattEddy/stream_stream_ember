@@ -4,7 +4,6 @@ import Storage from '../utils/storage';
 export default Ember.Object.extend({
   storage: new Storage(),
   open: function(authentication) {
-    debugger;
     var storage = this.get('storage');
     var authorizationCode = authentication.authorizationCode;
 
